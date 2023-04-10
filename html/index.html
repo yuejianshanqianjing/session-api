@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后台</title>
+    <script src="./jquery.js"></script>
+</head>
+<body>
+    <h1>首页</h1>
+    <button>退出登录</button>
+    <script>
+        const but = document.querySelector('button')
+        // 页面加载完成后，自动发起请求，获取用户姓名
+        $.get('/getname',(res)=>{
+            if(res.status !== 0){
+            alert('请进行登录')
+            location.href = './login.html'
+            }
+            else{
+            console.log(res);
+            alert('欢迎你,'+ res.username)
+            }
+            // res就是服务器给客户端发送的全部数据，这里只要res.send里的username 和res.status
+        })
+        // 点击退出登录按钮
+        but.addEventListener('click',function(){
+            $.post('/quit',(res)=>{
+                location.href = './login.html'
+            })
+        })
+    </script>
+</body>
+</html>

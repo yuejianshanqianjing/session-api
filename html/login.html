@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <script src="./jquery.js"></script>
+</head>
+<body>
+    <!-- 得要form 表单这个是要提交数据的，把用户名和密码提交给服务器的 -->
+    <form id="form1">
+        <div class="love">账号：<input type="text" name="username" autocomplete="off" /></div>
+        <div class="like">密码：<input type="password" name="password" /></div>
+        <button>登录</button>
+      </form>
+ 
+      <script>
+        $('#form1').on('submit',(e)=>{
+          e.preventDefault()
+          $.post('/login',$('#form1').serialize(),(res)=>{
+            if(res.status===0){
+              location.href = '/index.html'
+            }
+            else{
+                alert('登录失败')
+            }
+          })
+        })
+      </script>
+</body>
+</html>
